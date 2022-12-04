@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { toJSON } = require('./plugins')
+const { toJSON, paginate } = require('./plugins')
 
 const cardSchema = mongoose.Schema(
     {
@@ -31,6 +31,7 @@ const cardSchema = mongoose.Schema(
 )
 
 cardSchema.plugin(toJSON)
+cardSchema.plugin(paginate)
 
 /**
  * @typedef Token

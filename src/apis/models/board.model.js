@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { toJSON } = require('./plugins')
+const { toJSON, paginate } = require('./plugins')
 
 const boardSchema = mongoose.Schema(
     {
@@ -10,10 +10,6 @@ const boardSchema = mongoose.Schema(
         },
         columnOrder: {
             type: Array,
-        },
-        dueDate: {
-            type: Number,
-            required: false,
         },
         _destroy: {
             type: Boolean,
@@ -25,7 +21,9 @@ const boardSchema = mongoose.Schema(
     }
 )
 
+boardSchema.index({ title: 'text' })
 boardSchema.plugin(toJSON)
+boardSchema.plugin(paginate)
 
 /**
  * @typedef Token

@@ -18,8 +18,13 @@ const GetFullBoard = catchAsync(async (req, res) => {
     res.status(httpStatus.CREATED).send(board)
 })
 
+const GetFullBoardSafe = catchAsync(async (req, res) => {
+    const board = await boardService.getFullBoardSafe(req.params.id)
+    res.status(httpStatus.CREATED).send(board)
+})
+
 const GetBoards = catchAsync(async (req, res) => {
-    const boards = await boardService.getBoards()
+    const boards = await boardService.getBoards(req.query)
     res.status(httpStatus.OK).send(boards)
 })
 
@@ -27,4 +32,5 @@ module.exports = {
     CreateBoard,
     GetFullBoard,
     GetBoards,
+    GetFullBoardSafe,
 }

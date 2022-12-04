@@ -18,7 +18,7 @@ const logoutSchema = {
 
 const registerSchema = {
     body: Joi.object().keys({
-        displayName: Joi.string().required(),
+        displayName: Joi.string(),
         email: Joi.string().required().email(),
         password: Joi.string().required().custom(password),
     }),

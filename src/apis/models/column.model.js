@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { toJSON } = require('./plugins')
+const { toJSON, paginate } = require('./plugins')
 
 const columnSchema = mongoose.Schema(
     {
@@ -26,6 +26,7 @@ const columnSchema = mongoose.Schema(
 )
 
 columnSchema.plugin(toJSON)
+columnSchema.plugin(paginate)
 
 /**
  * @typedef Token
