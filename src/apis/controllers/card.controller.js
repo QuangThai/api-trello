@@ -13,7 +13,13 @@ const UpdateCard = catchAsync(async (req, res) => {
     res.status(httpStatus.OK).send({ card })
 })
 
+const DeleteCard = catchAsync(async (req, res) => {
+    const card = await cardService.deleteCard(req.params.id)
+    res.status(httpStatus.OK).send({ success: 200, card })
+})
+
 module.exports = {
     CreateCard,
     UpdateCard,
+    DeleteCard,
 }

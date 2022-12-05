@@ -1,5 +1,6 @@
-const { Card } = require('../models')
-const { columnService }  = require('../services')
+const { Card, Column } = require('../models')
+const { columnService } = require('../services')
+const ObjectId = require('mongoose').Types.ObjectId
 
 /**
  * Create a card
@@ -24,7 +25,26 @@ const updateCard = async (id, cardBody) => {
     return card
 }
 
+const deleteCard = async (cardId) => {
+    // get card current
+    const card = await Card.findById(new ObjectId(cardId))
+    if (card) {
+        // get column by card
+        const { columnId } = card
+
+        const column = await Column.findById(ObjectId(columnId))
+        // remove card
+        await card.remove()
+        // remove cardId by cardOrder in column
+        column.cardOrder.pull(card._id.toString())
+        await column.save()
+    } else {
+        throw new Error('Card not found')
+    }
+}
+
 module.exports = {
     createCard,
     updateCard,
+    deleteCard,
 }
