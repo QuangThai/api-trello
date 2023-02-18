@@ -1,11 +1,15 @@
 const httpStatus = require('http-status')
+const nodemailer = require('nodemailer')
 
 const catchAsync = require('../../utils/catch-async')
 const { authService, tokenService, userService } = require('../services')
+const { sendMail } = require('../services/auth.service')
 
 const register = catchAsync(async (req, res) => {
     const user = await userService.createUser(req.body)
     const tokens = await tokenService.generateAuthTokens(user)
+    // send mail
+    await sendMail(email)
     res.status(httpStatus.CREATED).send({ user, tokens })
 })
 

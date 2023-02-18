@@ -6,6 +6,9 @@ const userRoute = require('./v1/user.route')
 const boardRoute = require('./v1/board.route')
 const columnRoute = require('./v1/column.route')
 const cardRoute = require('./v1/card.route')
+const companyRoute = require('./v1/company.route')
+const employeeRoute = require('./v1/employee.route')
+
 
 const router = express.Router()
 
@@ -33,6 +36,14 @@ const defaultRoutes = [
     {
         path: '/v1/cards',
         route: cardRoute,
+    },
+    {
+        path: '/v1/companies',
+        route: companyRoute,
+    },
+    {
+        path: '/v1/employees',
+        route: employeeRoute,
     },
 ]
 
