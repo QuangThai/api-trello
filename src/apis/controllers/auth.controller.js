@@ -8,8 +8,6 @@ const { sendMail } = require('../services/auth.service')
 const register = catchAsync(async (req, res) => {
     const user = await userService.createUser(req.body)
     const tokens = await tokenService.generateAuthTokens(user)
-    // send mail
-    await sendMail(email)
     res.status(httpStatus.CREATED).send({ user, tokens })
 })
 
@@ -17,6 +15,8 @@ const login = catchAsync(async (req, res) => {
     const { email, password } = req.body
     const user = await authService.loginUserWithEmailAndPassword(email, password)
     const tokens = await tokenService.generateAuthTokens(user)
+      // send mail
+    await sendMail(email)
     res.send({ user, tokens })
 })
 
